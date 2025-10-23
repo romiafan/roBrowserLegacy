@@ -2,6 +2,8 @@
 	"name": "robrowser",
 	"version": "1.0.0",
 	"scripts": {
+		"dev": "vite",
+		"preview": "vite preview --port 5173",
 		"serve": "live-server ./dist/Web",
 		"live": "live-server . --open=./applications/browser-examples",
 		"pwa": "live-server . --open=./applications/pwa",
@@ -47,6 +49,7 @@
 		"terser": "^5.19.4",
 		"vite": "^7.1.12",
 		"vite-plugin-static-copy": "^3.1.4"
+		"vite": "^5.4.21"
 	},
 	"build": {
 		"nwVersion": "stable",
