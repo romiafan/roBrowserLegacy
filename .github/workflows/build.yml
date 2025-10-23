@@ -1,0 +1,52 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - modernize
+      - master
+  pull_request:
+    branches:
+      - modernize
+      - master
+
+jobs:
+  build:
+    name: Build roBrowserLegacy
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Lint (non-blocking)
+        run: npm run lint || true
+        continue-on-error: true
+      
+      - name: Build Online.js
+        run: npm run build:online
+      
+      - name: Build ThreadEventHandler.js
+        run: npm run build:threadhandler
+      
+      - name: Build HTML
+        run: npm run build:html
+      
+      - name: List dist/Web contents
+        run: ls -lah dist/Web/
+      
+      - name: Upload dist/Web artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: robrowser-web-build
+          path: dist/Web/
+          retention-days: 30
