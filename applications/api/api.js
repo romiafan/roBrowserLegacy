@@ -8,31 +8,25 @@
  * @author Vincent Thibault
  */
 
-
 (function ROAPI() {
-
-
-	'use strict';
-
+	"use strict";
 
 	/**
 	 * @Constructor
 	 */
 	function ROBrowser(options) {
-		if (typeof options === 'object') {
+		if (typeof options === "object") {
 			Object.assign(this.config, options);
 		}
 	}
-
 
 	/**
 	 * @Enum Robrowser type
 	 */
 	ROBrowser.TYPE = {
 		POPUP: 1,
-		FRAME: 2
+		FRAME: 2,
 	};
-
 
 	/**
 	 * @Enum Robrowser Applications
@@ -43,7 +37,7 @@
 		GRFVIEWER: 3,
 		MODELVIEWER: 4,
 		STRVIEWER: 5,
-		GRANNYMODELVIEWER: 6,  //sound weird O_o
+		GRANNYMODELVIEWER: 6, //sound weird O_o
 		EFFECTVIEWER: 7,
 	};
 
@@ -83,12 +77,12 @@
 		 *
 		 * b) {Array} server list to display:
 		 */
-		servers: 'data/clientinfo.xml',
+		servers: "data/clientinfo.xml",
 
 		/**
 		 * @var {string} Host where to download files
 		 */
-		remoteClient: 'https://grf.robrowser.com/',
+		remoteClient: "https://grf.robrowser.com/",
 
 		/**
 		 * @var {number|string} packet version
@@ -97,7 +91,7 @@
 		 *    a) YYYYMMDD     (number: date you want)
 		 *    c) 'executable' (detect packetver from executable compilation date)
 		 */
-		packetver: 'auto',
+		packetver: "auto",
 
 		/**
 		 * @var {number} character info block size
@@ -258,12 +252,12 @@
 		 * your users wil get the latest version running instead of a
 		 * cached one.
 		 */
-		version: '',
+		version: "",
 
 		/**
 		 * @var {URL} URL to the server's registration site
 		 */
-		registrationweb: '',
+		registrationweb: "",
 
 		/**
 		 * @var {Object} Dettings for World Map
@@ -297,7 +291,7 @@
 		 * Examples: ['ogg', 'mp4', 'mp3']
 		 * Will try to see if it can load '.ogg' audio file, if it fail, will try to see if it can load .mp4, etc.
 		 */
-		BGMFileExtension: ['mp3'],
+		BGMFileExtension: ["mp3"],
 
 		/**
 		 * @var {Object} Define plugin to execute
@@ -311,63 +305,65 @@
 		CameraMaxZoomOut: 5,
 	};
 
-
 	/**
 	 * @var {string} roBrowser api window path
 	 */
 	ROBrowser.prototype.baseUrl = (function () {
-		var script = document.getElementsByTagName('script');
+		var script = document.getElementsByTagName("script");
 		return script[script.length - 1].src
-			.replace(/\/[^\/]+\.js.*/, '/api.js') // redirect compiled script
-			.replace(/\/src\/.*/, '/api.js');     // fix error with cache (FF)
-	})().replace('.js', '.html');
-
+			.replace(/\/[^\/]+\.js.*/, "/api.js") // redirect compiled script
+			.replace(/\/src\/.*/, "/api.js"); // fix error with cache (FF)
+	})().replace(".js", ".html");
 
 	/**
 	 * Start ROBrowser Instance
 	 */
 	ROBrowser.prototype.start = function Start() {
 		switch (this.config.type) {
-
 			// Create Popup
 			case ROBrowser.TYPE.POPUP:
-				this.config.width = this.config.width || '800';
-				this.config.height = this.config.height || '600';
+				this.config.width = this.config.width || "800";
+				this.config.height = this.config.height || "600";
 
 				this._APP = window.open(
-					this.baseUrl + '?' + this.config.version,
-					'_blank',
+					this.baseUrl + "?" + this.config.version,
+					"_blank",
 					[
-						'directories=0',
-						'fullscreen=0',
-						'top=' + ((window.innerHeight || document.body.clientHeight) - this.config.height) / 2,
-						'left=' + ((window.innerWidth || document.body.clientWidth) - this.config.width) / 2,
-						'height=' + this.config.height,
-						'width=' + this.config.width,
-						'location=0',
-						'menubar=0',
-						'resizable=0',
-						'scrollbars=0',
-						'status=0',
-						'toolbar=0'
-					].join(',')
+						"directories=0",
+						"fullscreen=0",
+						"top=" +
+							((window.innerHeight || document.body.clientHeight) -
+								this.config.height) /
+								2,
+						"left=" +
+							((window.innerWidth || document.body.clientWidth) - this.config.width) /
+								2,
+						"height=" + this.config.height,
+						"width=" + this.config.width,
+						"location=0",
+						"menubar=0",
+						"resizable=0",
+						"scrollbars=0",
+						"status=0",
+						"toolbar=0",
+					].join(",")
 				);
 				break;
 
 			// Append ROBrowser to an element
 			case ROBrowser.TYPE.FRAME:
-				this.config.width = this.config.width || '100%';
-				this.config.height = this.config.height || '100%';
+				this.config.width = this.config.width || "100%";
+				this.config.height = this.config.height || "100%";
 
-				var frame = document.createElement('iframe');
-				frame.src = this.baseUrl + '?' + Math.random() + location.hash; // fix bug on firefox
+				var frame = document.createElement("iframe");
+				frame.src = this.baseUrl + "?" + Math.random() + location.hash; // fix bug on firefox
 				frame.width = this.config.width;
 				frame.height = this.config.height;
-				frame.style.border = 'none';
+				frame.style.border = "none";
 
-				frame.setAttribute('allowfullscreen', 'true');
-				frame.setAttribute('webkitallowfullscreen', 'true');
-				frame.setAttribute('mozallowfullscreen', 'true');
+				frame.setAttribute("allowfullscreen", "true");
+				frame.setAttribute("webkitallowfullscreen", "true");
+				frame.setAttribute("mozallowfullscreen", "true");
 
 				if (this.config.target) {
 					while (this.config.target.firstChild) {
@@ -380,45 +376,43 @@
 				break;
 		}
 
-
 		// Get back application name
 		switch (this.config.application) {
 			case ROBrowser.APP.ONLINE:
-				this.config.application = 'Online';
+				this.config.application = "Online";
 				break;
 
 			case ROBrowser.APP.MAPVIEWER:
-				this.config.application = 'MapViewer';
+				this.config.application = "MapViewer";
 				break;
 
 			case ROBrowser.APP.GRFVIEWER:
-				this.config.application = 'GrfViewer';
+				this.config.application = "GrfViewer";
 				break;
 
 			case ROBrowser.APP.MODELVIEWER:
-				this.config.application = 'ModelViewer';
+				this.config.application = "ModelViewer";
 				break;
 
 			case ROBrowser.APP.STRVIEWER:
-				this.config.application = 'StrViewer';
+				this.config.application = "StrViewer";
 				break;
 
 			case ROBrowser.APP.GRANNYMODELVIEWER:
-				this.config.application = 'GrannyModelViewer';
+				this.config.application = "GrannyModelViewer";
 				break;
 
 			case ROBrowser.APP.EFFECTVIEWER:
-				this.config.application = 'EffectViewer';
+				this.config.application = "EffectViewer";
 				break;
 		}
-
 
 		// Wait for robrowser to be ready
 		var _this = this;
 		function OnMessage(event) {
 			if (_this.baseUrl.indexOf(event.origin) === 0) {
 				clearInterval(_this._Interval);
-				window.removeEventListener('message', OnMessage, false);
+				window.removeEventListener("message", OnMessage, false);
 
 				if (_this.onReady) {
 					_this.onReady();
@@ -428,7 +422,7 @@
 
 		// Start waiting for robrowser
 		this._Interval = setInterval(WaitForInitialization.bind(this), 100);
-		window.addEventListener('message', OnMessage, false);
+		window.addEventListener("message", OnMessage, false);
 	};
 
 	/**
@@ -436,9 +430,8 @@
 	 * No onload event from external iframe/popup
 	 */
 	function WaitForInitialization() {
-		this._APP.postMessage(JSON.parse(JSON.stringify(this.config)), '*');
+		this._APP.postMessage(JSON.parse(JSON.stringify(this.config)), "*");
 	}
-
 
 	/**
 	 * Export

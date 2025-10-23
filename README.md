@@ -41,3 +41,106 @@ roBrowser was started by this [awesome team](https://github.com/vthibault/roBrow
 
 * Join us on [Discord](https://discord.gg/8JdHwM4Kqm)
 * Or in the [GIT Discussions](https://github.com/MrAntares/roBrowserLegacy/discussions)
+
+---
+
+## Docker Quick Start
+
+For development and testing, this project includes Docker configurations to simplify the setup process. This is the recommended approach for modern development workflows.
+
+### Prerequisites
+- Docker and Docker Compose installed on your system
+- Node.js 20+ (if working outside Docker)
+
+### Development with Docker
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/MrAntares/roBrowserLegacy.git
+   cd roBrowserLegacy
+   ```
+
+2. **Start the development environment**:
+   ```bash
+   docker-compose up ro-browser
+   ```
+   
+   This will:
+   - Create a Node.js 20 environment
+   - Mount the project directory into the container
+   - Expose port 8000 for the development server
+
+3. **Install dependencies and build** (inside the container):
+   ```bash
+   docker-compose exec ro-browser bash
+   npm install
+   npm run build:online
+   npm run build:threadhandler
+   npm run build:html
+   ```
+
+4. **Start the development server**:
+   ```bash
+   npm run live
+   ```
+   
+   Access the application at `http://localhost:8000`
+
+### Serving Built Artifacts
+
+To serve the production build using Apache:
+
+1. **Build the distributables** (if not already built):
+   ```bash
+   npm run build:online
+   npm run build:threadhandler
+   npm run build:html
+   ```
+
+2. **Start the Apache server**:
+   ```bash
+   docker-compose up serve-dist
+   ```
+   
+   Access the application at `http://localhost:8080`
+
+### macOS and Safari Considerations
+
+When developing for or testing on macOS with Safari:
+
+1. **HTTPS/WSS Requirements**: Modern browsers, including Safari, require secure connections (HTTPS/WSS) when accessing remote resources. For local development:
+   - Use `localhost` instead of `127.0.0.1` where possible
+   - Consider setting up local SSL certificates for testing
+   - Ensure your WebSocket proxy (wsProxy) is configured with WSS if accessing remotely
+
+2. **WebGL Support**: Safari supports WebGL 1.0, which is compatible with roBrowser. Ensure:
+   - Hardware acceleration is enabled in Safari preferences
+   - "Experimental Features" don't interfere with WebGL rendering
+
+3. **Cross-Origin Restrictions**: Safari enforces strict CORS policies. When using remote clients:
+   - Ensure proper CORS headers are set on your remote client server
+   - The provided Apache configuration includes CORS headers for development
+
+4. **Browser Compatibility**: This project is tested on:
+   - Safari 13+ (macOS)
+   - Chrome 80+ (Desktop & Mobile)
+   - Firefox 78+ (Desktop & Mobile)
+   - Edge 80+ (Desktop)
+
+### Node Version Management
+
+This project uses Node.js 20 LTS. If you have `nvm` installed:
+
+```bash
+nvm use
+# or
+nvm install
+```
+
+The `.nvmrc` file will automatically select the correct Node version.
+
+### Browser Targets
+
+Modern browser support is defined in `.browserslistrc`. Priority targets include Safari (macOS), Chrome, Firefox, and Edge with WebGL 1.0+ support.
+
+For the complete setup guide including game server configuration, remote client setup, and troubleshooting, see the [Getting Started documentation](doc/README.md).
