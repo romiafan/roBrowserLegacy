@@ -25,7 +25,30 @@ docker-compose up -d ro-browser
 This starts the development container with:
 - Node.js 20 environment
 - Port 8000 exposed for the web server
+- Port 5173 (default) exposed for Vite dev server (configurable via `VITE_PORT` in `.env`)
 - Source code mounted at `/app`
+
+**Configuring the Vite Port:**
+
+To use a custom port for the Vite development server:
+
+1. Copy the example environment file:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Edit `.env` and set your desired port:
+   ```
+   VITE_PORT=3000
+   ```
+
+3. Restart the container:
+   ```bash
+   docker-compose down
+   docker-compose up -d ro-browser
+   ```
+
+The Vite dev server will now be accessible at `http://localhost:3000` (or your configured port).
 
 ### 3. Access the Container
 
@@ -60,7 +83,9 @@ npm run build:html             # Build index.html
 
 ### 6. Serve the Built Files
 
-The project includes a separate service to serve the built files with Apache.
+The project includes a separate service to serve the built files with Apache, and you can also use Vite for modern development.
+
+#### Option 1: Apache Server (Production-like)
 
 First, make sure your files are built (see step 5), then:
 
@@ -70,11 +95,36 @@ docker-compose up -d serve-dist
 
 Access the client at: `http://localhost:8080`
 
+#### Option 2: Vite Dev Server (Development)
+
+For modern development with Vite:
+
+```bash
+# Inside the ro-browser container
+npm run dev
+```
+
+Access the client at: `http://localhost:5173` (or your configured `VITE_PORT`)
+
+#### Option 3: Vite Production Wrapper
+
+Build with Vite's production optimizations while preserving legacy outputs:
+
+```bash
+# Inside the ro-browser container
+npm run build:prodvite
+npm run preview
+```
+
+Access the preview at: `http://localhost:5173` (or your configured `VITE_PORT`)
+
+For more details on build options and development workflows, see [DEV-WORKFLOW.md](./DEV-WORKFLOW.md).
+
 ## Development Workflow
 
 ### Using Live Server (Development Mode)
 
-For development with live reload:
+For development with live reload using the legacy live-server:
 
 ```bash
 # Inside the ro-browser container
@@ -83,9 +133,28 @@ npm run serve
 
 This serves the files from `dist/Web` with live reload at `http://localhost:8000`.
 
+### Using Vite Dev Server (Modern Development)
+
+For modern development with Vite's fast HMR:
+
+```bash
+# Inside the ro-browser container
+npm run dev
+```
+
+This starts Vite's development server at `http://localhost:5173` (or your configured `VITE_PORT`).
+
+**Note:** You need to build the required files first:
+```bash
+npm run build -- -O -T -H
+npm run dev
+```
+
 To use development mode (loads source files directly):
 1. Set `development: true` in your `dist/Web/index.html` roBrowser config
 2. This loads files directly from `src/` for easier debugging
+
+For comprehensive development workflows and build options, see [DEV-WORKFLOW.md](./DEV-WORKFLOW.md).
 
 ### Rebuilding After Changes
 

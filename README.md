@@ -25,6 +25,46 @@ Checkout the [getting started guide](doc/README.md)
 
 ## Development
 
+### Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Build the client
+npm run build -- -O -T -H
+
+# Start development server (Vite - modern, configurable port)
+npm run dev
+
+# Or use legacy live-server
+npm run serve
+```
+
+### Configurable Development Server
+
+You can customize the Vite dev server port by creating a `.env` file:
+
+```bash
+cp .env.example .env
+# Edit .env and set VITE_PORT to your desired port (default: 5173)
+```
+
+### Build Options
+
+- **Legacy Build** - Traditional RequireJS-based bundling (generates Online.js and ThreadEventHandler.js):
+  ```bash
+  npm run build -- -O -T -H
+  ```
+
+- **Vite Production Wrapper** - Modern build with optimized static assets while preserving legacy outputs:
+  ```bash
+  npm run build:prodvite
+  ```
+
+For detailed development workflows and build options, see:
+- [Development Workflow Guide](docs/DEV-WORKFLOW.md)
+- [Docker Quick Start Guide](docs/DOCKER-QUICKSTART.md)
 For modern development workflows with live reload and HMR, see our [Development Workflow Guide](docs/DEV-WORKFLOW.md).
 
 For Docker-focused workflows, see our [Docker Quick Start Guide](docs/DOCKER-QUICKSTART.md).
