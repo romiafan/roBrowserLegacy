@@ -9,11 +9,13 @@ This guide explains how to use the modern Vite development server alongside the 
 The Vite dev server provides fast live reload and hot module replacement (HMR) for HTML, CSS, and JavaScript files. This is ideal for rapid development and iteration.
 
 **When to use Vite:**
+
 - Active development with frequent file changes
 - Testing HTML/CSS/JS edits with instant feedback
 - Local development on macOS Safari, Chrome, or other modern browsers
 
 **Limitations:**
+
 - Dev server only - not for production builds
 - Legacy builder still required for production outputs (Online.js, ThreadEventHandler.js)
 
@@ -22,6 +24,7 @@ The Vite dev server provides fast live reload and hot module replacement (HMR) f
 The existing live-server setup continues to work as before and can be used if you prefer the traditional workflow.
 
 **When to use live-server:**
+
 - Testing built production files from `dist/Web`
 - When Vite compatibility issues arise
 - NW.js development (unchanged)
@@ -31,11 +34,13 @@ The existing live-server setup continues to work as before and can be used if yo
 ### Local Development (Outside Docker)
 
 1. **Install dependencies** (first time only):
+
    ```bash
    npm install
    ```
 
 2. **Start Vite dev server**:
+
    ```bash
    npm run dev
    ```
@@ -49,16 +54,19 @@ The existing live-server setup continues to work as before and can be used if yo
 ### Docker Development
 
 1. **Start the Docker container**:
+
    ```bash
    docker-compose up -d ro-browser
    ```
 
 2. **Install dependencies** (first time only):
+
    ```bash
    docker-compose exec ro-browser npm install
    ```
 
 3. **Start Vite dev server inside the container**:
+
    ```bash
    docker-compose exec ro-browser npm run dev
    ```
@@ -86,16 +94,19 @@ The existing builder workflow remains unchanged and is still required for produc
 ### Building for Production
 
 **Build all production files**:
+
 ```bash
 npm run build -- -O -T -H
 ```
 
 This generates:
+
 - `dist/Web/Online.js` - Main application bundle
 - `dist/Web/ThreadEventHandler.js` - Worker thread handler
 - `dist/Web/index.html` - HTML entry point
 
 **Build individual components**:
+
 ```bash
 npm run build:online           # Build Online.js
 npm run build:threadhandler    # Build ThreadEventHandler.js
@@ -103,6 +114,7 @@ npm run build:html             # Build index.html
 ```
 
 **Build with minification**:
+
 ```bash
 npm run build -- --all --m
 ```
@@ -128,6 +140,7 @@ Safari (especially on macOS) may require HTTPS for certain features like WebSock
 You can configure Vite to use HTTPS by creating a local SSL certificate:
 
 1. Generate a self-signed certificate (one-time setup):
+
    ```bash
    # macOS/Linux
    openssl req -x509 -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost' \
@@ -135,9 +148,10 @@ You can configure Vite to use HTTPS by creating a local SSL certificate:
    ```
 
 2. Update `vite.config.ts` to use HTTPS:
+
    ```typescript
    import fs from 'fs';
-   
+
    server: {
      https: {
        key: fs.readFileSync('localhost-key.pem'),
@@ -165,11 +179,13 @@ For production deployments or when testing with real game servers, you'll need:
 ### Browser-Specific Notes
 
 **Safari:**
+
 - May show stricter CORS policies - ensure your WebSocket proxy allows CORS if needed
 - Service Workers require HTTPS in production
 - IndexedDB works in HTTPS and localhost
 
 **Chrome/Chromium:**
+
 - More permissive for localhost development
 - HTTPS still recommended for production-like testing
 
@@ -206,6 +222,7 @@ For production deployments or when testing with real game servers, you'll need:
 ### Vite Not Reloading
 
 If Vite isn't detecting file changes in Docker:
+
 - The config already uses polling (`usePolling: true`)
 - Check that files are being saved correctly
 - Try restarting the dev server
@@ -213,6 +230,7 @@ If Vite isn't detecting file changes in Docker:
 ### Port Already in Use
 
 If port 5173 is already in use:
+
 - Stop the conflicting process
 - Or edit `vite.config.ts` to use a different port
 - Update `docker-compose.yaml` port mapping accordingly
@@ -220,6 +238,7 @@ If port 5173 is already in use:
 ### Browser Connection Refused
 
 If you can't connect to `http://localhost:5173/`:
+
 - Ensure the dev server is running (`npm run dev`)
 - Check Docker port mappings in `docker-compose.yaml`
 - Verify container is running: `docker-compose ps`
@@ -227,6 +246,7 @@ If you can't connect to `http://localhost:5173/`:
 ### Legacy Scripts Not Working
 
 If existing scripts (`serve`, `live`, `build`) have issues:
+
 - These remain unchanged and should work as before
 - Check that dependencies are installed: `npm install`
 - See [DOCKER-QUICKSTART.md](DOCKER-QUICKSTART.md) for Docker-specific help
@@ -241,6 +261,7 @@ If existing scripts (`serve`, `live`, `build`) have issues:
 ## Future Enhancements (Out of Scope for Now)
 
 Future phases may include:
+
 - Using Vite for production builds alongside legacy builder
 - ES module refactoring
 - TypeScript integration for new code

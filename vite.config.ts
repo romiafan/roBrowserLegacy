@@ -15,16 +15,16 @@ export default defineConfig({
 		// Enable file watching inside Docker containers
 		watch: {
 			usePolling: true,
-			interval: 100,
+			interval: 100
 		},
 		// Disable CORS for local development
-		cors: true,
+		cors: true
 	},
 
 	preview: {
 		port: 5173,
-		host: '0.0.0.0',
-	},
+		host: '0.0.0.0'
+	}
 
 	// No build configuration - we're only using Vite for dev server
 	// Production builds continue to use the existing builder-web.js

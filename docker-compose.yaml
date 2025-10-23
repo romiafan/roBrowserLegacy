@@ -5,8 +5,8 @@ services:
       dockerfile: Dockerfile
       target: dev
     ports:
-      - "8000:8000"
-      - "5173:5173"  # Vite dev server
+      - '8000:8000'
+      - '5173:5173' # Vite dev server
       # You can use to serve wsproxy.
       #- "5999:5999"
     volumes:
@@ -19,8 +19,6 @@ services:
       dockerfile: Dockerfile
       target: dist-server
     ports:
-      - "8080:8080"
+      - '8080:8080'
     volumes:
       - ./dist/Web:/var/www/html
-
-
