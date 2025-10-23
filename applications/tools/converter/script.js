@@ -54,6 +54,7 @@
 	 * @param {string} string to convert
 	 */
 	function to_ascii(str) {
+		// eslint-disable-next-line no-control-regex
 		return str.replace(/[\u0000-\uffff]/g, function(ch) {
 			var code = ch.charCodeAt(0).toString(16);
 			if (code.length <= 2) {

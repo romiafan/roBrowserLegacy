@@ -98,7 +98,6 @@ function compile(appName, isMinify) {
     }
 
     const config = {
-        name: 'RONW',
         baseUrl: 'src',
         paths: {
             text: 'Vendors/text.require',

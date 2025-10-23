@@ -1,10 +1,7 @@
 const js = require('@eslint/js');
-const prettier = require('eslint-plugin-prettier');
-const prettierConfig = require('eslint-config-prettier');
 
 module.exports = [
   js.configs.recommended,
-  prettierConfig,
   {
     files: ['**/*.js'],
     languageOptions: {
@@ -60,13 +57,7 @@ module.exports = [
         requirejs: 'readonly'
       }
     },
-    plugins: {
-      prettier
-    },
     rules: {
-      // Prettier integration
-      'prettier/prettier': 'warn',
-      
       // Disable rules that conflict with existing codebase
       'no-unused-vars': 'off',
       'no-undef': 'off',
@@ -102,6 +93,7 @@ module.exports = [
       'AI/**',
       'data/**',
       'save/**',
+      'applications/tools/build/**',
       '*.min.js',
       'Online.js',
       'ThreadEventHandler.js',

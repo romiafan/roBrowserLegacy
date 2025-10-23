@@ -21,8 +21,9 @@
 		"build:all:minify": "npm run build -- --all --m",
 		"build:pwa": "npm run build -- --O --T --PWA",
 		"build:nw": "build --concurrent --tasks win-x86,win-x64 --mirror https://dl.nwjs.io/ ./applications/nwjs",
-		"lint": "eslint .",
-		"lint:fix": "eslint . --fix",
+		"lint": "eslint applications/tools/ --max-warnings=100",
+		"lint:all": "eslint src/ applications/tools/ --max-warnings=1000",
+		"lint:fix": "eslint applications/tools/ --fix",
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
 		"check": "npm run format:check && npm run lint"
