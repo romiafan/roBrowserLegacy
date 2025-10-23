@@ -1,0 +1,20 @@
+# Browsers that we support
+# Priority: macOS (Safari/Chrome)
+
+# macOS Safari (current and previous major versions)
+safari >= 15
+
+# iOS Safari (current and previous major versions)
+ios_saf >= 15
+
+# Chrome/Edge (modern versions)
+chrome >= 90
+edge >= 90
+
+# Firefox (modern versions)
+firefox >= 88
+
+# Default modern browsers
+last 2 versions
+> 0.5%
+not dead

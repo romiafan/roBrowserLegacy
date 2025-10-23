@@ -1,0 +1,39 @@
+# Build output
+dist/
+node_modules/
+
+# Vendor libraries
+vendors/
+src/Vendors/
+
+# Client assets
+client/
+AI/
+data/
+
+# Build artifacts
+*.min.js
+Online.js
+ThreadEventHandler.js
+GrfViewer.js
+MapViewer.js
+ModelViewer.js
+StrViewer.js
+EffectViewer.js
+GrannyModelViewer.js
+
+# Package manager
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# IDE and OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Temporary files
+save/
