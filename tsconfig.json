@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    // Enable JavaScript support
+    "allowJs": true,
+    "checkJs": true,
+    
+    // Target modern browsers
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ES2020",
+    
+    // Module resolution
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    
+    // Strict type checking (baseline)
+    "strict": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "strictBindCallApply": false,
+    "strictPropertyInitialization": false,
+    "noImplicitThis": false,
+    "alwaysStrict": false,
+    
+    // Additional checks (conservative)
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": false,
+    
+    // Other options
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    
+    // No emit - editor-only
+    "noEmit": true
+  },
+  "include": [
+    "src/**/*",
+    "applications/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "vendors",
+    "src/Vendors",
+    "client",
+    "AI",
+    "data"
+  ]
+}

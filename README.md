@@ -41,3 +41,7 @@ roBrowser was started by this [awesome team](https://github.com/vthibault/roBrow
 
 * Join us on [Discord](https://discord.gg/8JdHwM4Kqm)
 * Or in the [GIT Discussions](https://github.com/MrAntares/roBrowserLegacy/discussions)
+
+## Docker Quick Start
+
+For a Docker-focused workflow, see our [Docker Quick Start Guide](docs/DOCKER-QUICKSTART.md).
