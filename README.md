@@ -20,6 +20,12 @@ More live examples:
 ## Guide
 Checkout the [getting started guide](doc/README.md)
 
+## Development
+
+For modern development workflows with live reload and HMR, see our [Development Workflow Guide](docs/DEV-WORKFLOW.md).
+
+For Docker-focused workflows, see our [Docker Quick Start Guide](docs/DOCKER-QUICKSTART.md).
+
 ## Remote Client
 Remote Client serves game assets to roBrowser via http by extracting them from their GRFs. You will need to setup a remote client if you want to serve the game assets centrally from your server. roBrowser can use local game assets via the Intro screen by dragging them into the file box. The original implementation of the Remote Client is written in PHP:
 - [roBrowserLegacy-RemoteClient-PHP](https://github.com/MrAntares/roBrowserLegacy-RemoteClient-PHP)
