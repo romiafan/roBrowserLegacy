@@ -7,6 +7,8 @@
 		"pwa": "live-server . --open=./applications/pwa",
 		"tools": "live-server . --open=./applications/tools",
 		"nw": "nw .",
+		"dev": "vite",
+		"preview": "vite preview",
 		"build": "node ./applications/tools/builder-web.js",
 		"build:online": "npm run build -- -O",
 		"build:mapviewer": "npm run build -- -V",
@@ -20,6 +22,7 @@
 		"build:all": "npm run build -- --all",
 		"build:all:minify": "npm run build -- --all --m",
 		"build:pwa": "npm run build -- --O --T --PWA",
+		"build:prodvite": "npm run build -- -O -T -H && vite build && node ./applications/tools/vite-post-build.js",
 		"build:nw": "build --concurrent --tasks win-x86,win-x64 --mirror https://dl.nwjs.io/ ./applications/nwjs",
 		"lint": "eslint applications/tools/ --max-warnings=100",
 		"lint:all": "eslint src/ applications/tools/ --max-warnings=1000",
@@ -32,6 +35,7 @@
 	"license": "GNU GPL V3",
 	"devDependencies": {
 		"@eslint/js": "^9.38.0",
+		"@vitejs/plugin-legacy": "^7.2.1",
 		"eslint": "^9.38.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-prettier": "^5.5.4",
@@ -40,7 +44,9 @@
 		"nwjs-builder-phoenix": "^1.15.0",
 		"prettier": "^3.6.2",
 		"requirejs": "^2.3.6",
-		"terser": "^5.19.4"
+		"terser": "^5.19.4",
+		"vite": "^7.1.12",
+		"vite-plugin-static-copy": "^3.1.4"
 	},
 	"build": {
 		"nwVersion": "stable",

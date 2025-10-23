@@ -20,6 +20,49 @@ More live examples:
 ## Guide
 Checkout the [getting started guide](doc/README.md)
 
+## Development
+
+### Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Build the client
+npm run build -- -O -T -H
+
+# Start development server (Vite - modern, configurable port)
+npm run dev
+
+# Or use legacy live-server
+npm run serve
+```
+
+### Configurable Development Server
+
+You can customize the Vite dev server port by creating a `.env` file:
+
+```bash
+cp .env.example .env
+# Edit .env and set VITE_PORT to your desired port (default: 5173)
+```
+
+### Build Options
+
+- **Legacy Build** - Traditional RequireJS-based bundling (generates Online.js and ThreadEventHandler.js):
+  ```bash
+  npm run build -- -O -T -H
+  ```
+
+- **Vite Production Wrapper** - Modern build with optimized static assets while preserving legacy outputs:
+  ```bash
+  npm run build:prodvite
+  ```
+
+For detailed development workflows and build options, see:
+- [Development Workflow Guide](docs/DEV-WORKFLOW.md)
+- [Docker Quick Start Guide](docs/DOCKER-QUICKSTART.md)
+
 ## Remote Client
 Remote Client serves game assets to roBrowser via http by extracting them from their GRFs. You will need to setup a remote client if you want to serve the game assets centrally from your server. roBrowser can use local game assets via the Intro screen by dragging them into the file box. The original implementation of the Remote Client is written in PHP:
 - [roBrowserLegacy-RemoteClient-PHP](https://github.com/MrAntares/roBrowserLegacy-RemoteClient-PHP)

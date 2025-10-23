@@ -5,6 +5,7 @@
 /client/System/*
 /dist/
 /node_modules/
+/.vite-build-tmp/
 /src/Plugins/*/
 /index.html
 /package-lock.json
@@ -17,6 +18,10 @@
 /ThreadEventHandler.js
 /data/*
 /save/*
+
+# Environment files
+.env
+.env.local
 
 # IDE files
 .idea/

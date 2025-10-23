@@ -6,10 +6,13 @@ services:
       target: dev
     ports:
       - "8000:8000"
+      - "${VITE_PORT:-5173}:5173"
       # You can use to serve wsproxy.
       #- "5999:5999"
     volumes:
       - ./:/app
+    environment:
+      - VITE_PORT=${VITE_PORT:-5173}
     tty: true
 
   serve-dist:
