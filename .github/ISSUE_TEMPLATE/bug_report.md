@@ -1,10 +1,9 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: ''
+title: ""
 labels: Bug
-assignees: ''
-
+assignees: ""
 ---
 
 **Describe the bug**
@@ -17,8 +16,9 @@ Add screenshots to help explain your problem.
 Packet/Client version you use.
 
 **Browser/device info**
- - Browser: [e.g. stock browser, safari]
- - Device: [e.g. iPhone6]
+
+- Browser: [e.g. stock browser, safari]
+- Device: [e.g. iPhone6]
 
 **Additional context**
 Add any other context about the problem here.

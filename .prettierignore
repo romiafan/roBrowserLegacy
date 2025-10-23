@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build artifacts
+dist/
+*.min.js
+
+# Client data
+/client/
+/AI/
+/data/
+
+# Lock files
+package-lock.json
+
+# Git
+.git/
